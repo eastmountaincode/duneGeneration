@@ -16,19 +16,11 @@ model_rating = load_model('rating/content/saved_model2',
 model_helpful = load_model('helpful/content/saved_model/my_model',
                            custom_objects=ak.CUSTOM_OBJECTS)
 
-def generateReview():
-  generateReviewFUNC()
-  
-def generateReview2():
-  generateReview2FUNC()
-  
-
 st.image("duneGeneratorPic-01.png")
-generateButton = st.button("Generate review", on_click = generateReview)
-generateButton2 = st.button("Generate higher quality review (may take longer)",
-                            on_click = generateReview2)
+generateButton = st.button("Generate review")
+generateButton2 = st.button("Generate higher quality review (may take longer)")
 
-def generateReviewFUNC():
+if generateButton:
   validText = False
   while(validText == False):
     print("Generating")
@@ -71,7 +63,7 @@ def generateReviewFUNC():
 
     
 
-def generateReview2FUNC():
+if generateButton2:
   validText = False
   while(validText == False):
     print("Generating")
