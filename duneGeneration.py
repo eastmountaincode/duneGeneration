@@ -6,9 +6,16 @@ logging.basicConfig(
         level=logging.INFO
     )
 
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+##tokenizer = AutoTokenizer.from_pretrained("eastmountaincode/newDuneModel")
+##
+##model = AutoModelForCausalLM.from_pretrained("eastmountaincode/newDuneModel")
+
 from aitextgen import aitextgen
-ai = aitextgen(model_folder="newDuneModel",
-               to_gpu=False)
+ai = aitextgen(model = "eastmountaincode/newDuneModel")
+##ai = aitextgen(model_folder="newDuneModel",
+##               to_gpu=False)
 from keras.models import load_model
 import autokeras as ak
 model_rating = load_model('rating/content/saved_model2',
