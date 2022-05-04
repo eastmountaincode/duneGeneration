@@ -17,10 +17,8 @@ model_helpful = load_model('helpful/content/saved_model/my_model',
                            custom_objects=ak.CUSTOM_OBJECTS)
 
 st.image("duneGeneratorPic-01.png")
-generateButton = st.button("Generate review")
-generateButton2 = st.button("Generate higher quality review (may take longer)")
 
-if generateButton:
+def generateReview():
   validText = False
   while(validText == False):
     print("Generating")
@@ -63,7 +61,7 @@ if generateButton:
 
     
 
-if generateButton2:
+def generateReview2():
   validText = False
   while(validText == False):
     print("Generating")
@@ -108,6 +106,8 @@ if generateButton2:
   st.caption(str(generatedData["HelpfulScore"]) + " percent of people found this review helpful")
 
 
-
+generateButton = st.button("Generate review", on_click = generateReview)
+generateButton2 = st.button("Generate higher quality review (may take longer)",
+                            on_click = generateReview2)
   
 
