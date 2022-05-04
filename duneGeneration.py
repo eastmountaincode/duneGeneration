@@ -7,21 +7,36 @@ logging.basicConfig(
     )
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import tokenizers
 
-##tokenizer = AutoTokenizer.from_pretrained("eastmountaincode/newDuneModel")
-##
+#tokenizer = AutoTokenizer.from_pretrained("eastmountaincode/newDuneModel")
+
 ##model = AutoModelForCausalLM.from_pretrained("eastmountaincode/newDuneModel")
 
 from aitextgen import aitextgen
-ai = aitextgen(model = "eastmountaincode/newDuneModel")
+
+@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None,
+                      tokenizers.AddedToken: lambda _: None})
+def load_generation_model():
+  return aitextgen(model = "eastmountaincode/newDuneModel")
+
+ai = load_generation_model()
+
 ##ai = aitextgen(model_folder="newDuneModel",
 ##               to_gpu=False)
+
 from keras.models import load_model
 import autokeras as ak
-model_rating = load_model('rating/content/saved_model2',
+
+def load_rating_model():
+  return load_model('rating/content/saved_model2',
                           custom_objects=ak.CUSTOM_OBJECTS)
-model_helpful = load_model('helpful/content/saved_model/my_model',
+model_rating = load_rating_model()
+
+def load_helpful_model():
+  return load_model('helpful/content/saved_model/my_model',
                            custom_objects=ak.CUSTOM_OBJECTS)
+model_helpful = load_helpful_model()
 
 st.image("duneGeneratorPic-01.png")
 
